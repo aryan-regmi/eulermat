@@ -1,9 +1,8 @@
 mod helpers;
-use helpers::{c1, c2, c3, PrintMatrix};
+use helpers::{c1, c2, c3, PrintMatrix, cli};
 
-fn main() {
-    let val = c1(90.) * c2(-90.);
-    val.print();
+fn main() {    
+    unimplemented!();
 }
 
 // TODO: Parse Command Line Arguments

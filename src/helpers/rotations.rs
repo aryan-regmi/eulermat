@@ -1,6 +1,5 @@
 use nalgebra::base::Matrix3;
 
-
 pub trait PrintMatrix {
     fn print(&self);
 }

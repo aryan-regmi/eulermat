@@ -1,71 +1,33 @@
-mod matrix_helpers;
-use matrix_helpers::{c1, c2, c3, Degrees, RotMatrix};
-use std::env;
+use nalgebra::base::Matrix3;
 
-#[allow(unused_comparisons)]
-
-fn main() -> Result<(), String> {
-    let args: Vec<String> = env::args().collect();
-
-    let num_args = args.len() - 1;
-
-    if (num_args % 2 == 0) & (num_args > 0) {
-        let mut results:Vec<RotMatrix> = Vec::new();
-
-        for i in 1..num_args {
-            let arg = match &args[i].to_lowercase()[0..] {
-                "c1" => {
-                    let angle = args[i+1].parse::<f64>().unwrap_or(0.);
-                    Some(c1(Degrees(angle)))
-                },
-
-                "c2" => {
-                    let angle = args[i+1].parse::<f64>().unwrap_or(0.);
-                    Some(c2(Degrees(angle)))
-                }
-
-                "c3" => {
-                    let angle = args[i+1].parse::<f64>().unwrap_or(0.);
-                    Some(c3(Degrees(angle)))                    
-                }
-
-                &_ => None
-            };
-            
-            match arg {
-                Some(mat) => results.push(mat),
-                None => ()
-            }
-        }
-
-        let mut res_len = results.len();
-        if res_len > 0 {
-            res_len = res_len - 1;
-        }
-
-        let val = match res_len >= 0 {
-            true => {
-                for i in 0..results.len()-1 {
-                    results[i+1] = &results[i] * &results[i+1];
-                }
-                results[res_len].print();
-                Some(())
-            },
-
-            false => { None }
-        };
-        
-        match val {
-            Some(()) => Ok(()),
-            None => Err(String::from("\nInvalid Use! Pass rotations as separate, ordered arguments: C1(30.), C2(20.), etc.\n"))
-        }
-
-    }
-    else {
-        Err(String::from("\nInvalid Use! Pass rotations as separate, ordered arguments: C1(30.), C2(20.), etc.\n"))
-    }   
-
+trait PrintMatrix {
+    fn print(&self);
 }
+
+impl PrintMatrix for Matrix3<f64> {
+    fn print(&self) {
+        println!("\n {:#?} , {:#?} , {:#?} \n", self.row(0)[0], self.row(0)[1], self.row(0)[2]);
+        println!(" {:#?} , {:#?} , {:#?} \n", self.row(1)[0], self.row(1)[1], self.row(1)[2]);
+        println!(" {:#?} , {:#?} , {:#?} \n", self.row(2)[0], self.row(2)[1], self.row(2)[2]);
+    }
+}
+
+
+
+
+fn main() {
+    let m1 = Matrix3::new(1.,0.,0.,
+                                                   0.,0.,1.,
+                                                   0.,-1.,0.);
+    let m2 = Matrix3::new(0.,0.,1.,
+                                                  0.,1.,0.,
+                                                  -1.,0.,0.);
+
+    let prod = m1 * m2;
+    // println!("{:#?}", prod.data[0]);
+    prod.print();
+}
+
 
 // TODO: Route Errors to stderr instead of stdout
 // TODO: Write logic in separate file ?

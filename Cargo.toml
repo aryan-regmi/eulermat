@@ -8,5 +8,6 @@ edition = "2018"
 
 [dependencies]
 nalgebra = "0.18.0"
-rust_decimal = "1.7.0"
-rust_decimal_macros = "1.7.0"
+
+[dev-dependencies]
+speculate = "0.1.2"

@@ -40,7 +40,7 @@ pub fn cli() {
                         results.push(c3(angle));
                     },
                     
-                    _ => unimplemented!()
+                    _ => panic!("INVALID ROTATION: Please enter a valid rotation direction (c1, c2, c3)")
                 }
                 
             },

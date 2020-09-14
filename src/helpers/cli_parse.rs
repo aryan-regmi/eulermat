@@ -9,7 +9,8 @@ pub fn cli() {
     // Panic if no arguments
     // Panic if missing rotation-angle pair (ex: c1 90)
     if (num % 2 != 0) | (num <= 0) {
-        panic!("Invalid use: run with rotational direction, followed by angle in degrees (i.e run with 'c1 90 c2 -90' for C1(90) * C2(-90) ) ")
+        eprintln!("\nINVALID USE: run with rotational direction, followed by angle in degrees (i.e run with 'c1 90 c2 -90' for C1(90) * C2(-90) ) \n");
+        std::process::exit(1)
     }
 
     // Vector to store all rotation matrices
@@ -40,17 +41,24 @@ pub fn cli() {
                         results.push(c3(angle));
                     },
                     
-                    _ => panic!("INVALID ROTATION: Please enter a valid rotation direction (c1, c2, c3)")
+                    _ => {
+                        eprintln!("\nINVALID ROTATION: Please enter a valid rotation direction (c1, c2, c3)\n");
+                        std::process::exit(1)
+                    }
                 }
                 
             },
-            None => panic!("SOMETHING TERRIBLE HAPPENED -- NEVER HIT THIS ERROR!")
+            None => { 
+                eprintln!("\nSOMETHING TERRIBLE HAPPENED -- NEVER HIT THIS ERROR!\n");
+                std::process::exit(1)
+            }
         }
     }
 
     let res_len = results.len();
     if res_len == 0 {
-        panic!("No rotations were recorded!")
+        eprintln!("\nNo rotations were recorded!\n");
+        std::process::exit(1);
     }
 
     // Multiply each rotational matrix with the previous one (right to left matrix multiplication)

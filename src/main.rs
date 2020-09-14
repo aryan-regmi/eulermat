@@ -1,12 +1,11 @@
 mod helpers;
-use helpers::{c1, c2, c3, PrintMatrix, cli};
+use helpers::cli;
 
-fn main() {    
-    unimplemented!();
+fn main() {
+    cli();    
 }
 
-// TODO: Parse Command Line Arguments
 // TODO: Route Errors to stderr instead of stdout
-// TODO: Write logic in separate file ?
 // TODO: Write tests
-// TODO: Double check error handling
+// TODO: Use eyre crate for error handling
+// TODO: Add Egien vector/value support

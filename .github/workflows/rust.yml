@@ -2,9 +2,9 @@ name: Rust
 
 on:
   push:
-    branches: [ master ]
+    branches: [ nalgebra-test ]
   pull_request:
-    branches: [ master ]
+    branches: [ nalgebra-test ]
 
 env:
   CARGO_TERM_COLOR: always

@@ -1,5 +1,5 @@
 use nalgebra::base::Matrix3;
-use super::{c1, c2, c3, PrintMatrix};
+use super::{c1, c2, c3, PrintMatrix, eig, PrintEig};
 
 
 pub fn cli() {
@@ -68,5 +68,8 @@ pub fn cli() {
 
     // Print resultant matrix
     results[res_len-1].print();
+
+    // Print Eigen Decomposition
+    eig(results[res_len-1]).print();
     
 }

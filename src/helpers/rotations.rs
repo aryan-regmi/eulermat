@@ -7,7 +7,9 @@ pub trait PrintMatrix {
 
 impl PrintMatrix for Matrix3<f64> {
     fn print(&self) {
-        println!("\n {:.3} , {:.3} , {:.3} \n", self.row(0)[0], self.row(0)[1], self.row(0)[2]);
+        println!("\nRotation Matrix:");
+        println!("------------------");
+        println!(" {:.3} , {:.3} , {:.3} \n", self.row(0)[0], self.row(0)[1], self.row(0)[2]);
         println!(" {:.3} , {:.3} , {:.3} \n", self.row(1)[0], self.row(1)[1], self.row(1)[2]);
         println!(" {:.3} , {:.3} , {:.3} \n", self.row(2)[0], self.row(2)[1], self.row(2)[2]);
     }
